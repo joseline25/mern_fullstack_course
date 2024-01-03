@@ -1,10 +1,8 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+
+// renders the content of the react component App into the div-element,
+// defined in the file index.html, having the id value 'root'.
