@@ -1,31 +1,44 @@
+/* eslint-disable no-unused-vars */
 
 const Hello = () => {
   return (
     <div>
       <p>Hello from the first component here!</p>
     </div>
-  )
-}
+  );
+};
 /*
 We have defined a new component Hello and used it inside the component App. 
 Naturally, a component can be used multiple times:
 */
 
 const Hello2 = (props) => {
+  // Component helper functions
+  /*
+  Let's expand our Hello component so that it guesses the year of birth of the person 
+  being greeted: (it is an arrow funtion/method)
+  */
+  const bornYear = () => {
+    const yearNow = new Date().getFullYear();
+    return yearNow - props.age;
+  };
   return (
     <div>
-      <p>Hello {props.name}, you are {props.age} years old</p>
+      <p>
+        Hello {props.name}, you are {props.age} years old
+      </p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
-  )
-}
+  );
+};
 
 const Footer = () => {
   return (
     <div>
-      greeting app created by <a href='https://github.com/mluukkai'>mluukkai</a>
+      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
-  )
-}
+  );
+};
 
 // my first react component
 
@@ -35,26 +48,26 @@ const App = () => {
   const now = new Date();
   const a = 10;
   const b = 20;
-  const name = 'Peter'
-  const age = 10
+  const name = "Peter";
+  const age = 10;
   console.log(now, a + b);
   const friends = [
-    { name: 'Peter', age: 4 },
-    { name: 'Maya', age: 10 },
-  ]
+    { name: "Peter", age: 4 },
+    { name: "Maya", age: 10 },
+  ];
   return (
     <>
       <p>Hello Jose, it is {now.toString()}</p>
       <p>
         {a} plus {b} is {a + b}
       </p>
-      <Hello/>
-      <Hello/>
-      <Hello2 name='Orli' age='29'/>  
+      <Hello />
+      <Hello />
+      <Hello2 name="Orli" age="29" />
       <Hello2 name={name} age={age + 2} />
-      <Hello2 name={friends[1]['name']} age={friends[1].age} />
-      
-      <Footer/>
+      <Hello2 name={friends[1]["name"]} age={friends[1].age} />
+
+      <Footer />
     </>
   );
 };

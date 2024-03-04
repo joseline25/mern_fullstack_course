@@ -104,41 +104,41 @@ braces:
 */
 
 const object1 = {
-    name: 'Arto Hellas',
-    age: 35,
-    education: 'PhD',
-  }
-  
-  const object2 = {
-    name: 'Full Stack web application development',
-    level: 'intermediate studies',
-    size: 5,
-  }
-  
-  const object3 = {
-    name: {
-      first: 'Dan',
-      last: 'Abramov',
-    },
-    grades: [2, 3, 5, 3],
-    department: 'Stanford University',
-  }
+  name: "Arto Hellas",
+  age: 35,
+  education: "PhD",
+};
+
+const object2 = {
+  name: "Full Stack web application development",
+  level: "intermediate studies",
+  size: 5,
+};
+
+const object3 = {
+  name: {
+    first: "Dan",
+    last: "Abramov",
+  },
+  grades: [2, 3, 5, 3],
+  department: "Stanford University",
+};
 
 // The properties of an object are referenced by using the "dot" notation,
 // or by using brackets
 
-console.log(object1.name)         // Arto Hellas is printed
-const fieldName = 'age' 
-console.log(object1[fieldName])    // 35 is printed
+console.log(object1.name); // Arto Hellas is printed
+const fieldName = "age";
+console.log(object1[fieldName]); // 35 is printed
 
 /*
 You can also add properties to an object on the fly by either using dot notation 
 or brackets:
 */
 
-object1.address = 'Helsinki'
-object1['secret number'] = 12341
-console.log(object1)
+object1.address = "Helsinki";
+object1["secret number"] = 12341;
+console.log(object1);
 /*
 
 {
@@ -172,14 +172,14 @@ The complete process, without cutting corners, of defining an arrow
 function is as follows:
 */
 const sum = (p1, p2) => {
-  console.log(p1)
-  console.log(p2)
-  return p1 + p2
-}
+  console.log(p1);
+  console.log(p2);
+  return p1 + p2;
+};
 //and the function is called as can be expected:
 
-const result = sum(1, 5)
-console.log(result)
+const result = sum(1, 5);
+console.log(result);
 
 /*
 
@@ -187,13 +187,13 @@ If there is just a single parameter, we can exclude the parentheses from the
 definition:
  */
 
-const square = p => {
-    console.log(p)
-    return p * p
-  }
+const square = (p) => {
+  console.log(p);
+  return p * p;
+};
 
-const resultSquare = square(8)
-console.log(resultSquare) // 64
+const resultSquare = square(8);
+console.log(resultSquare); // 64
 
 /*
 If the function only contains a single expression then the braces are not needed.
@@ -201,16 +201,15 @@ In this case, the function only returns the result of its only expression. Now, 
 we remove console printing, we can further shorten the function definition:
 */
 
-const squareShort = p => p * p
+const squareShort = (p) => p * p;
 
 /*
 This form is particularly handy when manipulating arrays - e.g. when using
 the map method:
 */
 
-
-const tSquared = t.map(p => p * p)
-console.log(tSquared)
+const tSquared = t.map((p) => p * p);
+console.log(tSquared);
 // tSquared is now [ 1, 1, 9, 25 ]
 
 /*
@@ -223,11 +222,11 @@ declaration.
 */
 
 function product(a, b) {
-    return a * b
-  }
-  
-const result1 = product(2, 6)
-console.log(result1) // result1 is now 12
+  return a * b;
+}
+
+const result1 = product(2, 6);
+console.log(result1); // result1 is now 12
 
 /*
 The other way to define the function is by using a function expression. 
@@ -235,10 +234,161 @@ In this case, there is no need to give the function a name (anonymous function?)
 and the definition may reside among the rest of the code:
 */
 
-const average = function(a, b) {
-    return (a + b) / 2
+const average = function (a, b) {
+  return (a + b) / 2;
+};
+
+const result2 = average(2, 5);
+// result2 is now 3.5
+
+// Object methods and "this"
+
+/*
+Because this course uses a version of React containing React Hooks we do not need to
+define objects with methods. The contents of this chapter are not relevant to the 
+course but are certainly in many ways good to know. In particular, when using older
+ versions of React one must understand the topics of this chapter.
+
+  Notes: React Hooks are a feature introduced in React 16.8 that allows you to use
+   state and other React features in functional components. Before the introduction
+    of Hooks, state and lifecycle methods were only available in class components.
+     However, with Hooks, you can now use state and other React features in functional
+     components without the need for class components.
+
+    Some important React Hooks are:
+
+    useState: Allows functional components to have local state. It returns a 
+    stateful value and a function to update that value. It is commonly used 
+    for managing simple component-level state.
+
+    useEffect: Allows functional components to perform side effects such as 
+    fetching data, subscribing to events, or manually interacting with the DOM. 
+    It is similar to lifecycle methods like componentDidMount, componentDidUpdate, 
+    and componentWillUnmount in class components.
+
+    useContext: Allows functional components to access and consume a React context. 
+    It enables sharing data and functionality across components without manually 
+    passing props through intermediate components.
+
+    useReducer: Provides an alternative to useState for managing more complex state 
+    logic. It is particularly useful when the state transitions follow a pattern and 
+    involve multiple sub-values.
+
+    useCallback and useMemo: Help optimize performance by memoizing functions and 
+    values, respectively.
+
+    useRef: Provides a way to reference a mutable value that persists across renders. 
+    It is commonly used for accessing DOM elements or storing any mutable value that 
+    doesn't trigger a re-render.
+
+    Using hooks allows you to write more concise and reusable code by leveraging the 
+    power of functional components. Hooks enable you to manage state, perform side 
+    effects, and reuse logic in a simpler and more declarative way.
+
+
+Arrow functions and functions defined using the function keyword vary substantially
+when it comes to how they behave with respect to the keyword this, which refers to 
+the object itself.
+
+We can assign methods to an object by defining properties that are functions:
+*/
+
+const arto = {
+  name: "Arto Hellas",
+  age: 35,
+  education: "PhD",
+
+  greet: function () {
+    console.log("hello, my name is " + this.name);
+  },
+  backgroung: function () {
+    console.log(`When I was ${this.age - 5}, I was anxious!`); //note the use of ``
+    /*
+        Backticks (`) are used instead of single quotes (') in this case because
+         backticks allow the use of template literals in JavaScript. Template
+          literals are a special string syntax in JavaScript that allows for 
+          embedding expressions and performing string interpolation.
+        */
+  },
+  doAddition: function(a, b) {
+    console.log(a + b)
+  },
+};
+
+arto.greet(); // "hello, my name is Arto Hellas" gets printed
+arto.backgroung();
+
+// Methods can be assigned to objects even after the creation of the object
+
+arto.growOlder = function () {
+  this.age += 1;
+};
+
+console.log(arto.age)   // 35 is printed
+arto.growOlder()
+console.log(arto.age)   // 36 is printed
+
+
+// storing a method reference in a variable and calling the method through the variable
+arto.doAddition(1, 4)        // 5 is printed
+
+const referenceToAddition = arto.doAddition
+referenceToAddition(10, 15)   // 25 is printed
+
+//If we try to do the same with the method greet we run into an issue:
+
+arto.greet()       // "hello, my name is Arto Hellas" gets printed
+
+const referenceToGreet = arto.greet
+//referenceToGreet() // prints "hello, my name is undefined"
+
+/*
+When calling the method through a reference, the method loses knowledge of what 
+the original this was. Contrary to other languages, in JavaScript the value of 
+this is defined based on how the method is called. When calling the method through 
+a reference, the value of this becomes the so-called global object and the end 
+result is often not what the software developer had originally intended.
+
+Losing track of this when writing JavaScript code brings forth a few potential 
+issues. Situations often arise where React or Node (or more specifically the 
+JavaScript engine of the web browser) needs to call some method in an object 
+that the developer has defined. However, in this course, we avoid these issues 
+by using "this-less" JavaScript.
+*/
+
+// CLasses
+
+/*
+As mentioned previously, there is no class mechanism in JavaScript like the ones
+in object-oriented programming languages. There are, however, features to make 
+"simulating" object-oriented classes possible.
+
+Let's take a quick look at the class syntax that was introduced into JavaScript
+with ES6, which substantially simplifies the definition of classes (or class-like 
+things) in JavaScript.
+
+In the following example we define a "class" called Person and two Person objects:
+*/
+
+class Person {
+    constructor(name, age) {
+      this.name = name
+      this.age = age
+    }
+    greet() {
+      console.log('hello, my name is ' + this.name)
+    }
   }
   
-const result2 = average(2, 5)
-  // result2 is now 3.5
+  const adam = new Person('Adam Ondra', 29)
+  adam.greet()
+  
+  const janja = new Person('Janja Garnbret', 23)
+  janja.greet()  //hello, my name is Janja Garnbret
 
+  /*
+  The ES6 class syntax is used a lot in "old" React and also in Node.js, hence 
+  an understanding of it is beneficial even in this course. However, since we 
+  are using the new Hooks feature of React throughout this course, we have no 
+  concrete use for JavaScript's class syntax.
+  */
